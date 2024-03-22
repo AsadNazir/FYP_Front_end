@@ -19,8 +19,9 @@ export default function Login() {
 
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (placement) => {
-    api.info({
-      message: `Please fill all the fields`
+    api.warning({
+      message: `Please fill all the fields`,
+      placement,
     });
   };
 
@@ -45,8 +46,7 @@ export default function Login() {
 
     if (username === '' || password === '') {
       setPasswordError('error');
-      // alert('Please fill all the fields')
-      openNotification('topRight')
+      openNotification('top')
       return
     }
 
