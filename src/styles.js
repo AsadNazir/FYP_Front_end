@@ -5,6 +5,7 @@ export const fonts = {
 };
 
 export const fontSizes = {
+    xSmall:`text-xxs md:text-xs lg:text-sm`,
     small:`text-xs md:text-sm lg:text-base`,
     medium:`text-base md:text-lg lg:text-xl`,
     large:`text-lg md:text-xl lg:text-2xl`,
