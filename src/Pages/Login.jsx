@@ -17,6 +17,8 @@ const customTheme = {
 
 export default function Login() {
 
+
+  const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (placement) => {
     api.warning({
@@ -50,13 +52,12 @@ export default function Login() {
       return
     }
 
-    alert("clicked")
-    console.log('clicked')
+   navigate('/admin/dashboard')
   }
 
 
 
-  const navigate = useNavigate();
+
 
   return (
 
