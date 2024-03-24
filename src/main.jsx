@@ -10,6 +10,7 @@ import "./index.css";
 import Login from './Pages/Login.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
+import AddStudentForm from './Components/AddStudentForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
         element: <Dashboard/>,
         children: [
           {
-            path: "/admin/users",
-            element: <div>Users</div>,
+            path: "/admin/add-student",
+            element: <AddStudentForm/>
           },
           {
             path: "/admin/settings",

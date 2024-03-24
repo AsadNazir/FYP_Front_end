@@ -1,7 +1,8 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { fontSizes } from '../styles';
 import MyNavbar from './MyNavbar';
-
+import { useNavigate } from 'react-router-dom';
+import { AdminMenuItems } from '../Constants/index';
 import {
     AppstoreOutlined,
     ContainerOutlined,
@@ -14,31 +15,32 @@ import {
 import { Button, Menu } from 'antd';
 import { useSelector } from 'react-redux';
 
-function getItem(label, key, icon, children, type) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        type,
-    };
-}
-const items = [
-    getItem('Courses', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('Option 3', '3', <ContainerOutlined />),
-    getItem('Transcript', 'sub1', <MailOutlined />, [
-        getItem('Overall Transcript', '5'),
-        getItem('Running Transcript', '6'),
-    ]),
-    getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-        getItem('Option 9', '9'),
-        getItem('Option 10', '10'),
-        getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
-    ]),
-];
 export default function MySidebar() {
-
+    const navigate = useNavigate()
+    const onAdminMenuItemsClick = (e) => {
+        console.log('click', e);
+        if (e.key === '2') {
+            navigate('/admin/add-student')
+        }
+        if (e.key === '3') {
+            navigate('/admin/add-teacher')
+        }
+        if (e.key === '4') {
+            navigate('/admin/add-parent')
+        }
+        if (e.key === '6') {
+            navigate('/admin/add-remove-update-course')
+        }
+        if (e.key === '7') {
+            navigate('/admin/offer-course')
+        }
+        if (e.key === '8') {
+            navigate('/admin/register-course')
+        }
+        if (e.key === '9') {
+            navigate('/admin/course-requests')
+        }
+    }
     const user = useSelector((state) => state.user)
     console.log(user)
     const [collapsed, setCollapsed] = useState(false);
@@ -46,9 +48,15 @@ export default function MySidebar() {
         setCollapsed(!collapsed);
     };
 
+    useEffect(() => {
+        if (window.innerWidth < 768) {
+            setCollapsed(true)
+        }
+    }, [window.innerWidth])
+
     return (
-        <div className="">
-            <div className={`flex items-center md:order-2 px-4 bg-white text-2xl h-[15h]`}>
+        <div className="rounded-md w-full h-full">
+            {/* <div className={`flex items-center md:order-2 bg-white text-2xl h-[15h] w-fit`}>
 
 
                 <Button
@@ -61,55 +69,48 @@ export default function MySidebar() {
                 >
                     {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </Button>
-                <MyNavbar />
-                {/* <Dropdown
-    arrowIcon={false}
-    inline
-    label={
-        <>
 
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
-            <p className={`${fontSizes.small} font-medium ml-3`}>Bonnie Green</p>
-        </>
-    }
->
-    <Dropdown.Header>
-        <span className="block text-sm">Bonnie Green</span>
-        <span className="block truncate text-sm font-medium">name@flowbite.com</span>
-    </Dropdown.Header>
-    <Dropdown.Item>Dashboard</Dropdown.Item>
-    <Dropdown.Item>Settings</Dropdown.Item>
-    <Dropdown.Item>Earnings</Dropdown.Item>
-    <Dropdown.Divider />
-    <Dropdown.Item>Sign out</Dropdown.Item>
-</Dropdown> */}
-                {/* <Navbar.Toggle /> */}
-            </div>
+        
+            </div> */}
             <div
 
                 style={{
-                    overflow: 'auto',
-                    width: 256,
+                    borderRadius: '5px',
+                    overflow: 'hidden',
+                    height: '100%',
+                    // overflowY: 'auto',
+                    width: '100%',
+                    // width: 400,
+                    backgroundColor: 'white',
                 }}
-            >
+            >   
 
-                {/* <Button
-                type="primary"
-                onClick={toggleCollapsed}
-                style={{
-                    marginBottom: 16,
-                }}
-            >
-                {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            </Button> */}
+
+                {window.innerWidth < 768 &&
+                    <div className="w-full flex items-center justify-center">
+                        <Button
+                            type="default"
+                            onClick={toggleCollapsed}
+                            style={{
+                                marginBottom: 8,
+                                marginTop: 16
+                            }}
+                        >
+                            
+                            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        </Button>
+                    </div>
+                }
                 <Menu
-                    className='h-[85vh] overflow-y-auto'
+                    className='h-full overflow-y-auto p-2'
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     mode="inline"
+
+                    onClick={onAdminMenuItemsClick}
                     // theme="dark"
                     inlineCollapsed={collapsed}
-                    items={items}
+                    items={AdminMenuItems}
                 />
             </div>
         </div>
