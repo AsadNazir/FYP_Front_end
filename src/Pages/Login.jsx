@@ -6,6 +6,8 @@ import { fontSizes } from '../styles';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { notification } from 'antd';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../Redux/userSlice';
 
 const customTheme = {
   button: {
@@ -17,6 +19,7 @@ const customTheme = {
 
 export default function Login() {
 
+  const dispatch = useDispatch()
 
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
@@ -43,7 +46,7 @@ export default function Login() {
     }
     setPassword(e.target.value)
   }
-  const valiadte = (event) => {
+  const valiadte = async (event) => {
     event.preventDefault();
 
     if (username === '' || password === '') {
@@ -52,7 +55,9 @@ export default function Login() {
       return
     }
 
-   navigate('/admin/dashboard')
+    await dispatch(addUser({ username: username, password: password }))
+
+    navigate('/admin')
   }
 
 

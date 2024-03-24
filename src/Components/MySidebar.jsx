@@ -1,10 +1,7 @@
 import { React, useState } from 'react'
-import { HiChartPie, HiShoppingBag, HiInbox, HiUser, HiArrowSmRight, HiTable, HiLogout } from 'react-icons/hi';
-import { Sidebar, Dropdown, Avatar, Navbar } from 'flowbite-react';
-// import { Avatar } from 'flowbite-react/dist/Avatar';
 import { fontSizes } from '../styles';
-import logo from '../assets/logo-pucit.png';
 import MyNavbar from './MyNavbar';
+
 import {
     AppstoreOutlined,
     ContainerOutlined,
@@ -15,6 +12,7 @@ import {
     PieChartOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
+import { useSelector } from 'react-redux';
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -26,14 +24,12 @@ function getItem(label, key, icon, children, type) {
     };
 }
 const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
+    getItem('Courses', '1', <PieChartOutlined />),
     getItem('Option 2', '2', <DesktopOutlined />),
     getItem('Option 3', '3', <ContainerOutlined />),
-    getItem('Navigation One', 'sub1', <MailOutlined />, [
-        getItem('Option 5', '5'),
-        getItem('Option 6', '6'),
-        getItem('Option 7', '7'),
-        getItem('Option 8', '8'),
+    getItem('Transcript', 'sub1', <MailOutlined />, [
+        getItem('Overall Transcript', '5'),
+        getItem('Running Transcript', '6'),
     ]),
     getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
         getItem('Option 9', '9'),
@@ -42,6 +38,9 @@ const items = [
     ]),
 ];
 export default function MySidebar() {
+
+    const user = useSelector((state) => state.user)
+    console.log(user)
     const [collapsed, setCollapsed] = useState(false);
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
@@ -104,7 +103,7 @@ export default function MySidebar() {
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </Button> */}
                 <Menu
-                className='h-[85vh] overflow-y-auto'
+                    className='h-[85vh] overflow-y-auto'
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     mode="inline"
