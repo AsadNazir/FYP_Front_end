@@ -1,4 +1,5 @@
-import {PieChartOutlined, DesktopOutlined, ContainerOutlined} from '@ant-design/icons';
+import { PieChartOutlined, DesktopOutlined, ContainerOutlined } from '@ant-design/icons';
+import { HiLogout } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,22 +16,26 @@ function getItem(label, key, icon, children, type) {
 
 
 export const AdminMenuItems = [
+
+
     getItem('Add Users', 'sub1', <PieChartOutlined />,
         [
-            getItem('Add Student', '2'),
-            getItem('Add Teacher', '3'),
-            getItem('Add Parent', '4'),
+            getItem('Add Student', './add-student'),
+            getItem('Add Teacher', './add-teacher'),
+            getItem('View All Students', './view-students'),
         ]
     ),
-    getItem('Courses','sub2' , <DesktopOutlined />,
+    getItem('Courses', 'sub2', <DesktopOutlined />,
         [
-            getItem('Add/Remove/Update Course', '6'),
-            getItem('Offer Course', '7'),
-            getItem('Register Course', '8'),
+            getItem('Add/Remove/Update Course', './course'),
+            getItem('Offer Course', './offer-course'),
+            getItem('Register Course', './register-course'),
+
         ]
     ),
-   
-    getItem('Course Requests', 9, <ContainerOutlined />)
-     
+
+    getItem('Course Requests','./course-request', <ContainerOutlined />),
+    getItem('Logout', '/', <HiLogout />)
+
 ];
 
