@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../assets/logo-pucit.png'
 import { FloatingLabel, Button, Flowbite, Checkbox, Label, TextInput } from 'flowbite-react'
+import loginPage from '../assets/login-page.svg'
 // import { FaUserCircle } from "react-icons/fa";
 import { fontSizes } from '../styles';
 import { useNavigate } from 'react-router-dom';
@@ -74,13 +75,13 @@ export default function Login() {
         <h1 className={`${fontSizes.large} flex items-center font-bold`}>PUCIT-CMS</h1>
       </div>
       <div className="flex flex-row justify-between ">
-        <div className="left hidden sm:w-[35%] md:w-[40%] lg:w-[60%] sm:flex justify-center flex-col">
-
-          <h1 className={`${fontSizes.xLarge} font-semibold my-6`}>Welcome to PUCIT-CMS</h1>
+        <div className="left hidden sm:w-[35%] md:w-[40%] lg:w-[60%] sm:flex justify-center flex-col items-center">
+          <img src={loginPage} className='w-[70%] max-w-[400px] min-w-[200px]'/>
+          {/* <h1 className={`${fontSizes.xLarge} font-semibold my-6`}>Welcome to PUCIT-CMS</h1>
           <p className={`${fontSizes.xSmall}`}>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis, non?
             <a href="#"> Read more about our app</a>
-          </p>
+          </p> */}
         </div>
         <div className='right w-[70%] mx-auto sm:w-[50%] md:w-[40%] lg:w-[40%] flex flex-col justify-center items-center'>
           <form className=' bg-white  min-w-[300px] w-[100%] lg:w-[90%] shadow-lg rounded-md p-8 flex flex-col justify-center border-2'>

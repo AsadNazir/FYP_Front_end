@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Sidebar from '../Components/MySidebar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import MyNavbar from '../Components/MyNavbar'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { AdminMenuItems } from '../Constants';
-import { HiAcademicCap } from 'react-icons/hi';
+import { HiAcademicCap, HiMenuAlt1 } from 'react-icons/hi';
 import logo from '../assets/logo-pucit.png'
 import { Avatar, Dropdown } from 'flowbite-react';
 import { fontSizes } from '../styles';
@@ -19,10 +19,23 @@ const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].
 );
 
 export default function Dashboard() {
+
+    const navigate = useNavigate();
+
+
     const [collapsed, setCollapsed] = React.useState(false);
     const style = { overflow: 'auto', height: '100vh', position: 'sticky', left: 0, top: 0, bottom: 0 }
 
+    const onMenuItemsClick = (item) => {
 
+        if(item.key==='/')
+        {
+
+            // remove user from local storage
+            
+        }
+        navigate(item.key)
+    }
     return (
         <Layout>
             <Sider
@@ -32,8 +45,8 @@ export default function Dashboard() {
                 style={style}
                 className='min-h-screen py-5'
                 width={230}
-                // trigger={<HiAcademicCap />}
-                zeroWidthTriggerStyle={{ top: '100px', left: '0px', position: 'fixed' }}
+                trigger={<HiMenuAlt1 />}
+                zeroWidthTriggerStyle={{ position: 'fixed', top: 10, right: 0 }}
                 onBreakpoint={(broken) => {
                     console.log(broken);
                 }}
@@ -46,45 +59,35 @@ export default function Dashboard() {
                     <img src={logo} className="mr-2 w-[20%]" alt="Flowbite React Logo" />
                     <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PUCIT-CMS</span>
                 </div>
-                <div className="flex items-center justify-center">
-                    <div className='flex items-center w-full justify-center'>
-                        <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
-                        <p className={`${fontSizes.small} font-medium ml-4`}>Bonnie Green</p>
-                    </div>
-                </div>
-                <Menu theme="light" mode="inline" defaultSelectedKeys={['4']} items={AdminMenuItems} />
+                <Menu theme="light" mode="inline" onClick={onMenuItemsClick} items={AdminMenuItems} />
 
             </Sider>
             <Layout>
                 <Content
                 >
                     <div className={collapsed ? 'hidden' : 'block'}>
+                        <div className="w-full flex my-4 items-center justify-between px-4">
+                            <div className='flex items-center justify-start mx-4'>
+                                <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+                                <p className={`${fontSizes.small} font-medium ml-4`}>Bonnie Green
+                                <small className={`font-normal block ${fontSizes.xSmall}`}>Admin</small>
+                                </p>
+                            </div>
+                            <div className='w-fit'>
+                                {Date().split(' ').slice(0, 4).join(' ')}
+                            </div>
+                        </div>
+
                         {/* <MyNavbar /> */}
                         <Outlet />
                     </div>
                 </Content>
                 <Footer
-                    style={{
-                        textAlign: 'center',
-                    }}
+                className={`${fontSizes.xSmall} font-light text-center`}
                 >
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    PUCIT CMS ©{new Date().getFullYear()} Created by PUCIT Students
                 </Footer>
             </Layout>
         </Layout>
-        // <div className=''>
-        //     <div className='sticky top-0'>
-        //         <MyNavbar />
-        //     </div>
-        //     <div className='flex relative h-[85vh]'>
-        //         <div className="w-[25%] h-full overflow-y-auto overflow-x-hidden left-0">
-        //             <Sidebar />
-        //         </div>
-        //         <div className='overflow-y-auto overflow-x-hidden'>
-
-        //             <Outlet />
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
