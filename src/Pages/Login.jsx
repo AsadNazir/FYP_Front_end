@@ -72,7 +72,7 @@ export default function Login() {
       <div className="flex mb-10 sm:mb-0">
         <div className=''><img src={logo} alt="" className='w-[60%] md:w-[60%]' />
         </div>
-        <h1 className={`${fontSizes.large} flex items-center font-bold`}>PUCIT-CMS</h1>
+        <h1 className={`${fontSizes.medium} flex items-center font-semibold`}>Faculty of Computing and Information Technolgy</h1>
       </div>
       <div className="flex flex-row justify-between ">
         <div className="left hidden sm:w-[35%] md:w-[40%] lg:w-[60%] sm:flex justify-center flex-col items-center">

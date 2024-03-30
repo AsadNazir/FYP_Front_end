@@ -5,6 +5,7 @@ import { message, Upload, Modal } from 'antd';
 const { Dragger } = Upload;
 import { HiAcademicCap, HiUpload } from 'react-icons/hi';
 import { fontSizes } from '../styles';
+import { studentAPI } from '../API/api';
 
 const { Option } = Select;
 
@@ -59,12 +60,30 @@ export default function AddStudentForm() {
     },
   };
 
+  // creating a form hook
+  const [form] = Form.useForm();
+
+  // function to handle form submission
+  const onFinish = (values) => {
+    console.log('Success:', values);
+    values.status = 'active';
+
+    console.log(
+      values
+    )
+
+
+    form.resetFields();
+  };
+
+
+
 
   return (
     <>
       <h1 className={`text-center ${fontSizes.xLarge} font-medium my-5`}>Add Students</h1>
       <div className='flex justify-center items-center my-10'>
-        <Button type="default" className='flex  items-center text-white bg-blue-500 cursor-not-allowed' size='large' htmlType='button' loading={false} onClick={showModal} >
+        <Button type="default" className='flex  items-center text-white bg-blue-500' size='large' htmlType='button' loading={false} onClick={showModal} >
           <HiUpload className='mr-2 text-xl' />
           Upload File
         </Button>
@@ -75,7 +94,7 @@ export default function AddStudentForm() {
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        okButtonProps={{className:'bg-blue-500 text-white'}}
+        okButtonProps={{ className: 'bg-blue-500 text-white' }}
       >
         <Dragger {...props}>
           <p className="ant-upload-drag-icon">
@@ -87,16 +106,19 @@ export default function AddStudentForm() {
           </p>
         </Dragger>
       </Modal>
-      <Form {...formItemLayout} variant="outlined" className={`${fontSizes.xxx} w-full md:max-w-[900px] w-max-[300px] p-10 md:p-0`} >
+      <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[900px] mx-auto w-max-[300px] p-10 md:p-0`} >
 
         <Row > {/* Add gutter for spacing between columns */}
           <Col xs={{ span: 24 }} sm={{ span: 12 }}> {/* Adjust column span for mobile and desktop */}
             <Form.Item
               label="Roll No"
               name="RollNo"
-              rules={[{ required: true, message: 'Please input Roll No!' }]}
+              rules={[{
+                required: true, message: 'Please input Roll No!'
+
+              }]}
             >
-              <Input className='rounded-lg outline-none border-gray-300' />
+              <Input className='rounded-lg outline-none border-gray-300' min={1} max={99} />
             </Form.Item>
           </Col>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}> {/* Adjust column span for mobile and desktop */}
@@ -126,12 +148,12 @@ export default function AddStudentForm() {
               name="Age"
               rules={[{ required: true, message: 'Please input Age!' }]}
             >
-              <InputNumber />
+              <InputNumber min={10} max={40} />
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
+        <Row>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Gender"
@@ -155,7 +177,7 @@ export default function AddStudentForm() {
           </Col>
         </Row>
 
-        <Row gutter={16}>
+        <Row >
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Country"
@@ -174,7 +196,7 @@ export default function AddStudentForm() {
           </Col>
         </Row>
 
-        <Row gutter={16}>
+        <Row >
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Address"
@@ -186,49 +208,57 @@ export default function AddStudentForm() {
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Batch"
-              name="Batch"
+              name="BatchID"
               rules={[{ required: true, message: 'Please select Batch!' }]}
             >
-              <Select>
-                <Option value="2018">Fall 2018</Option>
-                <Option value="2019">Fall 2019</Option>
-                <Option value="2020">Fall 2020</Option>
-                <Option value="2021">Fall 2021</Option>
-                <Option value="2022">Fall 2022</Option>
+              <Select defaultValue={1}>
+                <Option value="1">Fall 2018</Option>
+                <Option value="2">Fall 2019</Option>
               </Select>
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
+        <Row>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Campus"
-              name="Campus"
+              name="CampusID"
             >
               <Radio.Group>
-                <Radio value="OC">Old Campus OC</Radio>
-                <Radio value="NC">New Campus NC</Radio>
+                <Radio value="1">Old Campus OC</Radio>
+                <Radio value="2">New Campus NC</Radio>
               </Radio.Group>
             </Form.Item>
           </Col>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
-              label="Section ID"
-              name="SectionID"
+              label="Section"
+              name="Section"
+              rules={[{ required: true, message: 'Please select Section!' }]}
             >
-              <InputNumber />
+              <Select>
+                <Option value="1">Morning</Option>
+                <Option value="2">Afternoon</Option>
+              </Select>
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
+        <Row>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
-              label="Department ID"
+              label="Department"
               name="DepartmentID"
+              required
+              rules={[{ required: true, message: 'Please select Department!' }]}
             >
-              <InputNumber />
+              <Select>
+                <Option value="1">Computer Science</Option>
+                <Option value="2">Information Technology</Option>
+                <Option value="3">Software Engineering</Option>
+                <Option value="4">Data Science</Option>
+              </Select>
             </Form.Item>
           </Col>
         </Row>
@@ -236,7 +266,7 @@ export default function AddStudentForm() {
         <Row className='flex justify-center'>
           <Col>
             <Form.Item> {/* Adjust wrapper column for button */}
-              <Button type="default" className='flex  items-center text-white bg-blue-500 cursor-not-allowed' size='large' htmlType='submit' loading={true} >
+              <Button type="default" className='flex  items-center text-white bg-blue-500 ' size='large' htmlType='submit' loading={false} >
                 <HiAcademicCap className='mr-2 text-xl' />
                 Add Student
               </Button>

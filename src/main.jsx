@@ -12,6 +12,8 @@ import NotFound from './Pages/NotFound.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
 import AddStudentForm from './Components/AddStudentForm.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
+import AddTeacherForm from './Components/AddTeacherForm.jsx';
+import Teacher from './Components/AddTeacherForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/add-teacher",
-            element: <div>Add Teacher</div>,
+            element:<Teacher />,
           }
           ,
           {

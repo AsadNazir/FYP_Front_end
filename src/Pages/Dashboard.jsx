@@ -43,10 +43,10 @@ export default function Dashboard() {
                 collapsedWidth="0"
                 theme='light'
                 style={style}
-                className='min-h-screen py-5'
+                className='min-h-screen py-5 shadow-lg border-r dark:bg-gray-800 dark:text-white'
                 width={230}
                 trigger={<HiMenuAlt1 />}
-                zeroWidthTriggerStyle={{ position: 'fixed', top: 10, right: 0 }}
+                zeroWidthTriggerStyle={{ position: 'fixed', top: 20, right: 5, zIndex: 999,border:'1px solid gray', borderRadius: '50%', boxShadow: '0 0 10px rgba(0,0,0,0.2)'}}
                 onBreakpoint={(broken) => {
                     console.log(broken);
                 }}
@@ -64,9 +64,10 @@ export default function Dashboard() {
             </Sider>
             <Layout>
                 <Content
+                className=''
                 >
                     <div className={collapsed ? 'hidden' : 'block'}>
-                        <div className="w-full flex my-4 items-center justify-between px-4">
+                        <div className="bg-white shadow-sm w-full flex py-4 items-center justify-between px-4">
                             <div className='flex items-center justify-start mx-4'>
                                 <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
                                 <p className={`${fontSizes.small} font-medium ml-4`}>Bonnie Green
