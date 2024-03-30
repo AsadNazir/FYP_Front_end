@@ -24,15 +24,14 @@ export default function Dashboard() {
 
 
     const [collapsed, setCollapsed] = React.useState(false);
-    const style = { overflow: 'auto', height: '100vh', position: 'sticky', left: 0, top: 0, bottom: 0 }
+    const style = { overflow: 'auto', height: '100vh', position: 'sticky', zIndex:9999, left: 0, top: 0, bottom: 0 }
 
     const onMenuItemsClick = (item) => {
 
-        if(item.key==='/')
-        {
+        if (item.key === '/') {
 
             // remove user from local storage
-            
+
         }
         navigate(item.key)
     }
@@ -46,7 +45,7 @@ export default function Dashboard() {
                 className='min-h-screen py-5 shadow-lg border-r dark:bg-gray-800 dark:text-white'
                 width={230}
                 trigger={<HiMenuAlt1 />}
-                zeroWidthTriggerStyle={{ position: 'fixed', top: 20, right: 5, zIndex: 999,border:'1px solid gray', borderRadius: '50%', boxShadow: '0 0 10px rgba(0,0,0,0.2)'}}
+                zeroWidthTriggerStyle={{ boxShadow: '1px 1px 1px 1px rgba(0,0,0,0.1)', zIndex: 9999, position: 'fixed', top: 20, right: 10, border: '1px solid grey', backgroundColor: 'white', padding: '10px', borderRadius: '50%' }}
                 onBreakpoint={(broken) => {
                     console.log(broken);
                 }}
@@ -64,14 +63,14 @@ export default function Dashboard() {
             </Sider>
             <Layout>
                 <Content
-                className=''
+                    className=''
                 >
                     <div className={collapsed ? 'hidden' : 'block'}>
                         <div className="bg-white shadow-sm w-full flex py-4 items-center justify-between px-4">
                             <div className='flex items-center justify-start mx-4'>
                                 <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
                                 <p className={`${fontSizes.small} font-medium ml-4`}>Bonnie Green
-                                <small className={`font-normal block ${fontSizes.xSmall}`}>Admin</small>
+                                    <small className={`font-normal block ${fontSizes.xSmall}`}>Admin</small>
                                 </p>
                             </div>
                             <div className='w-fit'>
@@ -84,7 +83,7 @@ export default function Dashboard() {
                     </div>
                 </Content>
                 <Footer
-                className={`${fontSizes.xSmall} font-light text-center`}
+                    className={`${fontSizes.xSmall} font-light text-center`}
                 >
                     PUCIT CMS ©{new Date().getFullYear()} Created by PUCIT Students
                 </Footer>

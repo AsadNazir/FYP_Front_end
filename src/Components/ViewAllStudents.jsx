@@ -14,6 +14,7 @@ const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
+
         // specify the condition of filtering result
         // here is that finding the name started with `value`
         onFilter: (value, record) => record.name.indexOf(value) === 0,
@@ -27,6 +28,7 @@ const columns = [
     {
         title: 'Department',
         dataIndex: 'department',
+        // width: 150,
         filters: [
             {
                 text: 'Computer Science',
@@ -50,21 +52,20 @@ const columns = [
     {
         title: 'CGPA',
         dataIndex: 'cgpa',
+    
         sorter: (a, b) => a.cgpa - b.cgpa,
     },
     {
         title: 'Action',
         key: 'operation',
-        fixed: 'right',
-        width: 100,
+        // width: 100,
         render: () => <a className='text-blue-700 underline'>View</a>,
     },
     {
         title: "Status",
         key : "status",
-        fixed: 'right',
+        // fixed: 'right',
         dataIndex: "status",
-        width: 100,
         render: () => <span className='text-red-500'>Probation</span>
     }
 
@@ -228,8 +229,8 @@ export function SearchFieldByNameOrRollNo() {
 
 function SearchAndResults(props) {
     return (
-        <div className=''>
-            <Table className='shadow-md' dataSource={props.data} scroll={{x:1000}} columns={columns} onChange={onChange} />
+        <div className='-z-10'>s
+            <Table className='shadow-md' dataSource={props.data} scroll={{x:700}} columns={columns} onChange={onChange} />
         </div>
     );
 }

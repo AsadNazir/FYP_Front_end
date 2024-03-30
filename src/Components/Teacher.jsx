@@ -30,19 +30,19 @@ const formItemLayout = {
 const TabContent = [
     {
         title: 'Add Teacher',
-        key : '1',
+        key: '1',
         component: <AddTeacherForm />,
         icon: <HiUserCircle />,
     },
     {
         title: 'View Teacher',
-        key : '2',
+        key: '2',
         component: <h1>View Teacher</h1>,
         icon: <MdDashboard />,
     },
     {
         title: 'Search Teacher',
-        key : '3',
+        key: '3',
         component: <h1>Search Teacher</h1>,
         icon: <HiAdjustments />,
     },
@@ -55,29 +55,6 @@ const TabContent = [
 export default function Teacher() {
     return (
         <TabBar tabs={TabContent} />
-        // <Tabs aria-label="Tabs with icons" style="underline">
-        //     <Tabs.Item active title="Add Teacher">
-        //         <AddTeacherForm />
-        //     </Tabs.Item>
-        //     <Tabs.Item title="View Teacher">
-        //         This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</span>.
-        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-        //         control the content visibility and styling.
-        //     </Tabs.Item>
-        //     <Tabs.Item title="Search Teacher" icon={HiAdjustments}>
-        //         This is <span className="font-medium text-gray-800 dark:text-white">Settings tab's associated content</span>.
-        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-        //         control the content visibility and styling.
-        //     </Tabs.Item>
-        //     <Tabs.Item title="Contacts" icon={HiClipboardList}>
-        //         This is <span className="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</span>.
-        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-        //         control the content visibility and styling.
-        //     </Tabs.Item>
-        //     <Tabs.Item disabled title="Disabled">
-        //         Disabled content
-        //     </Tabs.Item>
-        // </Tabs>
     );
 }
 
@@ -112,7 +89,7 @@ export function AddTeacherForm() {
     const props = {
         name: 'file',
         multiple: true,
-        // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+
         onChange(info) {
             const { status } = info.file;
             if (status !== 'uploading') {
