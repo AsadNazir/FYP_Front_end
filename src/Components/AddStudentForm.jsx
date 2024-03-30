@@ -22,22 +22,6 @@ const formItemLayout = {
 
 export default function AddStudentForm() {
 
-
-  // fetch(studentAPI.addStudent, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //   }
-
-  //   )
-  // })
-
-
-
-
-
   const [open, setOpen] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [modalText, setModalText] = React.useState('Content of the modal');
@@ -82,17 +66,6 @@ export default function AddStudentForm() {
   // function to handle form submission
   const onFinish = (values) => {
     console.log('Success:', values);
-
-    // fetch(studentAPI.addStudent, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     values,
-    //     status: 'active'
-    //   })
-    // })
     values.status = 'active';
 
     console.log(
