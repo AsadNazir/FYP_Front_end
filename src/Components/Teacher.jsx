@@ -1,15 +1,16 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import { Button, Form, Radio, Input, InputNumber, Select, Row, Col } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload, Modal } from 'antd';
 const { Dragger } = Upload;
 import { HiAcademicCap, HiUpload } from 'react-icons/hi';
-import { fontSizes } from '../styles';
-import { studentAPI } from '../API/api';
+import { fontSizes } from '../styles.js';
+import { studentAPI } from '../API/api.js';
 
 import { Tabs } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import TabBar from './TabBar.jsx';
 
 const { Option } = Select;
 
@@ -26,35 +27,61 @@ const formItemLayout = {
 
 
 
+const TabContent = [
+    {
+        title: 'Add Teacher',
+        key : '1',
+        component: <AddTeacherForm />,
+        icon: <HiUserCircle />,
+    },
+    {
+        title: 'View Teacher',
+        key : '2',
+        component: <h1>View Teacher</h1>,
+        icon: <MdDashboard />,
+    },
+    {
+        title: 'Search Teacher',
+        key : '3',
+        component: <h1>Search Teacher</h1>,
+        icon: <HiAdjustments />,
+    },
+
+]
+
+
+
+
 export default function Teacher() {
     return (
-        <Tabs aria-label="Tabs with icons" style="underline">
-            <Tabs.Item active title="Add Teacher">
-              <AddTeacherForm/>
-            </Tabs.Item>
-            <Tabs.Item title="View Teacher">
-                This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</span>.
-                Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                control the content visibility and styling.
-            </Tabs.Item>
-            <Tabs.Item title="Search Teacher" icon={HiAdjustments}>
-                This is <span className="font-medium text-gray-800 dark:text-white">Settings tab's associated content</span>.
-                Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                control the content visibility and styling.
-            </Tabs.Item>
-            <Tabs.Item title="Contacts" icon={HiClipboardList}>
-                This is <span className="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</span>.
-                Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                control the content visibility and styling.
-            </Tabs.Item>
-            <Tabs.Item disabled title="Disabled">
-                Disabled content
-            </Tabs.Item>
-        </Tabs>
+        <TabBar tabs={TabContent} />
+        // <Tabs aria-label="Tabs with icons" style="underline">
+        //     <Tabs.Item active title="Add Teacher">
+        //         <AddTeacherForm />
+        //     </Tabs.Item>
+        //     <Tabs.Item title="View Teacher">
+        //         This is <span className="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</span>.
+        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
+        //         control the content visibility and styling.
+        //     </Tabs.Item>
+        //     <Tabs.Item title="Search Teacher" icon={HiAdjustments}>
+        //         This is <span className="font-medium text-gray-800 dark:text-white">Settings tab's associated content</span>.
+        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
+        //         control the content visibility and styling.
+        //     </Tabs.Item>
+        //     <Tabs.Item title="Contacts" icon={HiClipboardList}>
+        //         This is <span className="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</span>.
+        //         Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
+        //         control the content visibility and styling.
+        //     </Tabs.Item>
+        //     <Tabs.Item disabled title="Disabled">
+        //         Disabled content
+        //     </Tabs.Item>
+        // </Tabs>
     );
 }
 
-function AddTeacherForm() {
+export function AddTeacherForm() {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
