@@ -10,10 +10,10 @@ import "./index.css";
 import Login from './Pages/Login.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
-import AddStudentForm from './Components/AddStudentForm.jsx';
+import Student from './Components/Student.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
-import AddTeacherForm from './Components/AddTeacherForm.jsx';
-import Teacher from './Components/AddTeacherForm.jsx';
+import Teacher from './Components/Teacher.jsx';
+import Course from './Components/Course.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,16 +35,16 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/admin/add-student",
-            element: <AddStudentForm />
+            element: <Student />
           },
           {
             path: "/admin/add-teacher",
-            element:<Teacher />,
+            element: <Teacher />,
           }
           ,
           {
             path: "/admin/course",
-            element: <div>Course</div>,
+            element: <Course />,
           }
           ,
           {
@@ -56,6 +56,31 @@ const router = createBrowserRouter([
             path: "/admin/settings",
             element: <div>Settings</div>,
           },
+          {
+            path: "/admin/grading",
+            element: <div>Grading</div>,
+          },
+          {
+            path: "/admin/department",
+            element: <div>Department</div>,
+          },
+          {
+            path: "/admin/session",
+            element: <div>Session</div>,
+          },
+          {
+            path: "/admin/batch",
+            element: <div>Batch</div>,
+          },
+          {
+            path: "/admin/campus",
+            element: <div>Campus</div>,
+          },
+          {
+            path: "/admin/profile",
+            element: <div>Profile</div>,
+
+          }
         ]
 
       }
