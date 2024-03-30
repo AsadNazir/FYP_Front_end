@@ -61,7 +61,10 @@ const columns = [
     },
     {
         title: "Status",
+        key : "status",
+        fixed: 'right',
         dataIndex: "status",
+        width: 100,
         render: () => <span className='text-red-500'>Probation</span>
     }
 
@@ -71,6 +74,55 @@ const columns = [
 const data = [
     {
         key: '1',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '2',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '3',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '4',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '5',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '6',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '7',
+        name: 'John Brown',
+        rollNo: 'BSEF20M534',
+        department: 'CS',
+        cgpa: 3.5,
+    },
+    {
+        key: '7',
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
@@ -137,9 +189,6 @@ const StudentsOnProbation = () => {
 
 
 
-
-
-
 export default function ViewAllStudents() {
 
     const formItemLayout = {
@@ -180,7 +229,7 @@ export function SearchFieldByNameOrRollNo() {
 function SearchAndResults(props) {
     return (
         <div className=''>
-            <Table className='shadow-md' dataSource={props.data} columns={columns} onChange={onChange} />
+            <Table className='shadow-md' dataSource={props.data} scroll={{x:1000}} columns={columns} onChange={onChange} />
         </div>
     );
 }
