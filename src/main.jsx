@@ -14,6 +14,7 @@ import Student from './Components/Student.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
 import Teacher from './Components/Teacher.jsx';
 import Course from './Components/Course.jsx';
+import Grading from './Components/Grading.jsx';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/grading",
-            element: <div>Grading</div>,
+            element: <Grading/>,
           },
           {
             path: "/admin/department",
