@@ -12,9 +12,11 @@ import NotFound from './Pages/NotFound.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
 import Student from './Components/Student.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
-import Teacher from './Components/Teacher.jsx';
+import Teacher, { EditTeacher } from './Components/Teacher.jsx';
 import Course from './Components/Course.jsx';
 import Grading from './Components/Grading.jsx';
+import ViewTeacher from './Components/ViewAllteachers.jsx';
+import AddTeacherForm from './Components/Teacher.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +42,17 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/add-teacher",
-            element: <Teacher />,
+            element: <AddTeacherForm />,
+          }
+          ,
+          {
+            path: "/admin/view-teachers",
+            element: <ViewTeacher />,
+          }
+          ,
+          {
+            path: "/admin/edit-teacher",
+            element: <EditTeacher />,
           }
           ,
           {

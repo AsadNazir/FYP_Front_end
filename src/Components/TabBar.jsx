@@ -7,7 +7,7 @@ export default function TabBar(props) {
             {props.tabs.map((tab) => {
                 return (
                     <Tabs.Tab title={tab.title} key={tab.key}>
-                        <Tabs.Item>
+                        <Tabs.Item >
                             {tab.component}
                         </Tabs.Item>
                     </Tabs.Tab>

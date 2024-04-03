@@ -23,6 +23,7 @@ export const AdminMenuItems = [
             getItem('Add Student', './add-student'),
             getItem('Add Teacher', './add-teacher'),
             getItem('View All Students', './view-students'),
+            getItem('View All Faculty', './view-teachers'),
         ]
     ),
     getItem('Courses', './course', <HiOutlineBookOpen />),

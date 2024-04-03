@@ -1,3 +1,4 @@
+
 import { React, useState } from 'react';
 import { Button, Form, Radio, Input, InputNumber, Select, Row, Col } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
@@ -28,107 +29,129 @@ const formItemLayout = {
 };
 
 
+export function EditTeacher() {
 
-const TabContent = [
-    {
-        title: 'Add Teacher',
-        key: '1',
-        component: <AddTeacherForm />,
-        icon: <HiUserCircle />,
-    },
-    {
-        title: 'View Teacher',
-        key: '2',
-        component: <ViewAllTeachers />,
-        icon: <MdDashboard />,
-    },
-    {
-        title: 'Search Teacher',
-        key: '3',
-        component: <h1>Search Teacher</h1>,
-        icon: <HiAdjustments />,
-    },
+    const onFinish = (values) => {
+        console.log('Success:', values);
+    };
 
-]
-export default function EditTeacher()
-{
-    return(
-        <h1>Edit Teacher</h1>
-    )
-
-}
-export default function Teacher() {
+    const [form] = Form.useForm();
     return (
-        <TabBar tabs={TabContent} />
-    );
-}
+        <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[800px] mx-auto w-max-[300px] p-10 md:p-0`} >
 
-function ViewAllTeachers() {
+            <Row > {/* Add gutter for spacing between columns */}
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}> {/* Adjust column span for mobile and desktop */}
+                    <Form.Item
+                        label="Teacher ID"
+                        name="TeacherCode"
+                        rules={[{
+                            required: true, message: 'Please input Roll No!'
 
-    const columns = [
-        {
-            title: 'Teacher ID',
-            dataIndex: 'TeacherID',
-            key: 'TeacherID',
-        },
-        {
-            title: 'Name',
-            dataIndex: 'FirstName',
-            key: 'FirstName',
-        },
-        {
-            title: 'Department',
-            dataIndex: 'Department',
-            key: 'Department'
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, { TeacherID }) => {
-                return (
-                    <>
-                        <a className='mr-4 text-blue-700 underline'>View</a>
-                        <Link to={"edit-Teacher"} className='text-blue-700 underline' >Edit</Link>
-                    </>
-                )
-            }
-        }
-    ]
+                        }]}
+                    >
+                        <Input className='rounded-lg outline-none border-gray-300' min={1} max={99} />
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}> {/* Adjust column span for mobile and desktop */}
+                    <Form.Item
+                        label="First Name"
+                        name="FirstName"
+                        rules={[{ required: true, message: 'Please input First Name!' }]}
+                    >
+                        <Input className='rounded-lg outline-none border-gray-300' />
+                    </Form.Item>
+                </Col>
+            </Row>
 
-    const data = [
-        {
-            TeacherID: 1,
-            FirstName: 'John Doe',
-            Department: 'Computer Science'
-        },
-        {
-            TeacherID: 2,
-            FirstName: 'Jane Doe',
-            Department: 'Information Technology'
-        },
-        {
-            TeacherID: 3,
-            FirstName: 'John Doe',
-            Department: 'Software Engineering'
-        },
-        {
-            TeacherID: 4,
-            FirstName: 'Jane Doe',
-            Department: 'Data Science'
-        },
-    ]
+            <Row>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Last Name"
+                        name="LastName"
+                        rules={[{ required: true, message: 'Please input Last Name!' }]}
+                    >
+                        <Input className='rounded-lg outline-none border-gray-300' />
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Age"
+                        name="Age"
+                        rules={[{ required: true, message: 'Please input Age!' }]}
+                    >
+                        <InputNumber min={10} max={40} />
+                    </Form.Item>
+                </Col>
+            </Row>
 
-    return (
-        <div className='w-[90%] md:w-[70%] mx-auto'>
-            <div className='my-4'>
-                <Input placeholder='Search Teacher' prefix={<HiSearch className='mr-2 ' />} className='rounded-lg txet outline-none border-gray-300' />
-            </div>
-            <MyTable columns={columns} data={data} />
-        </div>
+            <Row>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Gender"
+                        name="Gender"
+                        rules={[{ required: true, message: 'Please select Gender!' }]}
+                    >
+                        <Select>
+                            <Option value="Male">Male</Option>
+                            <Option value="Female">Female</Option>
+                            <Option value="Other">Other</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Email"
+                        name="Email"
+                        rules={[{ required: true, message: 'Please input Email!' }]}
+                    >
+                        <Input className='rounded-lg outline-none border-gray-300' />
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row >
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Phone No"
+                        name="PhoneNo"
+                    >
+                        <Input className='rounded-lg outline-none border-gray-300' size='small' />
+                    </Form.Item>
+                </Col>
+
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Department"
+                        name="DepartmentID"
+                        required
+                        rules={[{ required: true, message: 'Please select Department!' }]}
+                    >
+                        <Select>
+                            <Option value="1">Computer Science</Option>
+                            <Option value="2">Information Technology</Option>
+                            <Option value="3">Software Engineering</Option>
+                            <Option value="4">Data Science</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row className='flex justify-center'>
+                <Col>
+                    <Form.Item> {/* Adjust wrapper column for button */}
+                        <Button type="default" className='flex  items-center text-white bg-blue-500 ' size='large' htmlType='submit' loading={false} >
+                            <HiAcademicCap className='mr-2 text-xl' />
+                            Add Teacher
+                        </Button>
+                    </Form.Item>
+                </Col>
+            </Row>
+        </Form>
     )
 }
 
-export function AddTeacherForm() {
+
+export default function AddTeacherForm() {
 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
