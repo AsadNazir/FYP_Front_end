@@ -103,7 +103,7 @@ export default function Login() {
             <a href="#"> Read more about our app</a>
           </p> */}
         </div>
-        <div className='right w-[70%] mx-auto sm:w-[50%] md:w-[40%] lg:w-[40%] flex flex-col justify-center items-center'>
+        <div className='right w-[90%] mx-auto sm:w-[50%] md:w-[40%] lg:w-[40%] flex flex-col justify-center items-center'>
           <form className=' bg-white  min-w-[300px] w-[100%] lg:w-[90%] shadow-lg rounded-md p-8 flex flex-col justify-center border-2'>
             <h1 className={`${fontSizes.large} font-medium text-center`}>Login</h1>
             <div>

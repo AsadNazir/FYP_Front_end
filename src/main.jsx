@@ -17,7 +17,8 @@ import Course from './Components/Course.jsx';
 import Grading from './Components/Grading.jsx';
 import ViewTeacher from './Components/ViewAllteachers.jsx';
 import AddTeacherForm from './Components/Teacher.jsx';
-import { AdminMenuItems, StudentMenuItems } from './Constants/index.jsx';
+import { AdminMenuItems, StudentMenuItems, TeacherMenuItem } from './Constants/index.jsx';
+import { ChangePassword, EditProfileAdmin, EditProfileStudent, ProfileTeacher } from './Components/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/profile",
-            element: <div>Profile</div>,
+            element: <EditProfileAdmin />
 
           }
         ]
@@ -101,7 +102,7 @@ const router = createBrowserRouter([
       ,
       {
         path: '/student',
-        element: <Dashboard menuItem={StudentMenuItems}/>,
+        element: <Dashboard menuItem={StudentMenuItems} />,
         children: [
           {
             path: '/student/courses',
@@ -109,10 +110,41 @@ const router = createBrowserRouter([
           },
           {
             path: '/student/profile',
-            element: <div>Profile</div>
+            element: <div>Student Profile</div>
+          }
+          ,
+          {
+            path: '/student/transcript',
+            element: <div>Transcript</div>
+          }
+          ,
+          {
+            path: '/student/running-transcript',
+            element: <div>Running Transcript</div>
+          }
+          ,
+          {
+            path:'/student/change-password',
+            element:<ChangePassword/>
           }
         ]
       }
+      ,
+      {
+        path: '/teacher',
+        element: <Dashboard menuItem={TeacherMenuItem} />,
+        children: [
+          {
+            path: '/teacher/profile',
+            element: <ProfileTeacher />
+          },
+          {
+            path: '/teacher/change-password',
+            element: <ChangePassword />
+          }
+        ]
+      }
+
     ]
   },
 

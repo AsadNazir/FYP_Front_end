@@ -1,5 +1,6 @@
 import { PieChartOutlined, DesktopOutlined, ContainerOutlined } from '@ant-design/icons';
-import { HiBookOpen, HiBookmark, HiFingerPrint, HiLogout, HiOutlineBookOpen } from 'react-icons/hi';
+import { HiBookOpen, HiBookmark, HiBookmarkAlt, HiFingerPrint, HiLogin, HiLogout, HiOutlineBookOpen } from 'react-icons/hi';
+import { CgProfile } from "react-icons/cg";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,9 +17,19 @@ function getItem(label, key, icon, children, type) {
 
 export const StudentMenuItems = [
     getItem('Courses', './course', <HiOutlineBookOpen />),
+    getItem('Transcript', './transcript', <HiBookmark />),
+    getItem('Running Transcript', 'running-trancript', <HiBookmarkAlt />),
+    getItem('Change Password', './change-password', <HiFingerPrint />),
     getItem('Profile', './profile', <HiFingerPrint />),
     getItem('Logout', '/', <HiLogout />)
 ];
+
+export const TeacherMenuItem = [
+    getItem('Courses', './course', <HiOutlineBookOpen />),
+    getItem('Profile', './profile', <CgProfile />),
+    getItem('Change Password', './change-password', <HiFingerPrint />),
+    getItem('Logout', '/', <HiLogout />)
+]
 
 export const AdminMenuItems = [
 
