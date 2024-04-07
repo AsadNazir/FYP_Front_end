@@ -4,12 +4,13 @@ const initialState =
 {
     user: {
         username: '',
-        password: ''
+        password: '',
+        role: ''
     }
 }
 
 export const userSlice = createSlice({
-  name: 'counter',
+  name: 'user',
   initialState,
   reducers: {
     addUser: (state, data) => {
@@ -24,7 +25,8 @@ export const userSlice = createSlice({
     removeUser: (state) => {
         state.user = {
             username: '',
-            password: ''
+            password: '',
+            role: ''
         }
     },
     

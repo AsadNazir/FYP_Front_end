@@ -17,6 +17,7 @@ import Course from './Components/Course.jsx';
 import Grading from './Components/Grading.jsx';
 import ViewTeacher from './Components/ViewAllteachers.jsx';
 import AddTeacherForm from './Components/Teacher.jsx';
+import { AdminMenuItems, StudentMenuItems } from './Constants/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <Dashboard />,
+        element: <Dashboard menuItem={AdminMenuItems} />,
         children: [
           {
             path: "/admin/add-student",
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/grading",
-            element: <Grading/>,
+            element: <Grading />,
           },
           {
             path: "/admin/department",
@@ -96,6 +97,21 @@ const router = createBrowserRouter([
           }
         ]
 
+      }
+      ,
+      {
+        path: '/student',
+        element: <Dashboard menuItem={StudentMenuItems}/>,
+        children: [
+          {
+            path: '/student/courses',
+            element: <Course />
+          },
+          {
+            path: '/student/profile',
+            element: <div>Profile</div>
+          }
+        ]
       }
     ]
   },

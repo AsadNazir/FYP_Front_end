@@ -14,6 +14,11 @@ function getItem(label, key, icon, children, type) {
     };
 }
 
+export const StudentMenuItems = [
+    getItem('Courses', './course', <HiOutlineBookOpen />),
+    getItem('Profile', './profile', <HiFingerPrint />),
+    getItem('Logout', '/', <HiLogout />)
+];
 
 export const AdminMenuItems = [
 

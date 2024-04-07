@@ -1,30 +1,31 @@
 import React, { useEffect } from 'react'
-import Sidebar from '../Components/MySidebar'
 import { Outlet, useNavigate } from 'react-router-dom'
-import MyNavbar from '../Components/MyNavbar'
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
-import { AdminMenuItems } from '../Constants';
-import { HiAcademicCap, HiMenuAlt1 } from 'react-icons/hi';
+import { Layout, Menu } from 'antd';
+import { useSelector } from 'react-redux';
+import { HiMenuAlt1 } from 'react-icons/hi';
 import logo from '../assets/logo-pucit.png'
-import { Avatar, Dropdown } from 'flowbite-react';
+import { Avatar } from 'flowbite-react';
 import { fontSizes } from '../styles';
-const { Header, Content, Footer, Sider } = Layout;
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);
+const { Content, Footer, Sider } = Layout;
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+
+    const user = useSelector(state => state.user);
+    useEffect(() => {
+        console.log(user);
+        // check if user is logged in
+        if (!user) {
+            alert('Please login first');
+            navigate('/login');
+        }
+        // if not redirect to login page
+    }, [])
 
     const navigate = useNavigate();
 
 
     const [collapsed, setCollapsed] = React.useState(false);
-    const style = { overflow: 'auto', height: '100vh', position: 'sticky', zIndex:9999, left: 0, top: 0, bottom: 0 }
+    const style = { overflow: 'auto', height: '100vh', position: 'sticky', zIndex: 9999, left: 0, top: 0, bottom: 0 }
 
     const onMenuItemsClick = (item) => {
 
@@ -58,7 +59,7 @@ export default function Dashboard() {
                     <img src={logo} className="mr-2 w-[20%]" alt="Flowbite React Logo" />
                     <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">PUCIT-CMS</span>
                 </div>
-                <Menu theme="light" mode="inline" onClick={onMenuItemsClick} items={AdminMenuItems} />
+                <Menu theme="light" mode="inline" onClick={onMenuItemsClick} items={props.menuItem} />
 
             </Sider>
             <Layout>
@@ -70,7 +71,7 @@ export default function Dashboard() {
                             <div className='flex items-center justify-start mx-4'>
                                 <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
                                 <p className={`${fontSizes.small} font-medium ml-4`}>Bonnie Green
-                                    <small className={`font-normal block ${fontSizes.xSmall}`}>Admin</small>
+                                    <small className={`font-normal block ${fontSizes.xSmall}`}>{user.user.role}</small>
                                 </p>
                             </div>
                             <div className='w-fit'>

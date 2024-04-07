@@ -78,35 +78,35 @@ const data = [
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
-        cgpa: 3.5,
+        cgpa: 3.0,
     },
     {
         key: '2',
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
-        cgpa: 3.5,
+        cgpa: 3.9,
     },
     {
         key: '3',
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
-        cgpa: 3.5,
+        cgpa: 3.53,
     },
     {
         key: '4',
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
-        cgpa: 3.5,
+        cgpa: 3.98,
     },
     {
         key: '5',
         name: 'John Brown',
         rollNo: 'BSEF20M534',
         department: 'CS',
-        cgpa: 3.5,
+        cgpa: 3.0,
     },
     {
         key: '6',
@@ -229,7 +229,7 @@ export function SearchFieldByNameOrRollNo() {
 
 function SearchAndResults(props) {
     return (
-        <div className='-z-10'>s
+        <div className='-z-10'>
             <Table className='shadow-md' dataSource={props.data} scroll={{x:700}} columns={columns} onChange={onChange} />
         </div>
     );
