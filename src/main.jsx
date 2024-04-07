@@ -12,8 +12,13 @@ import NotFound from './Pages/NotFound.jsx';
 import Dashboard from './Pages/Dashboard.jsx';
 import Student from './Components/Student.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
-import Teacher from './Components/Teacher.jsx';
+import Teacher, { EditTeacher } from './Components/Teacher.jsx';
 import Course from './Components/Course.jsx';
+import Grading from './Components/Grading.jsx';
+import ViewTeacher from './Components/ViewAllteachers.jsx';
+import AddTeacherForm from './Components/Teacher.jsx';
+import { AdminMenuItems, StudentMenuItems, TeacherMenuItem } from './Constants/index.jsx';
+import { ChangePassword, EditProfileAdmin, EditProfileStudent, ProfileTeacher } from './Components/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <Dashboard />,
+        element: <Dashboard menuItem={AdminMenuItems} />,
         children: [
           {
             path: "/admin/add-student",
@@ -39,7 +44,17 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/add-teacher",
-            element: <Teacher />,
+            element: <AddTeacherForm />,
+          }
+          ,
+          {
+            path: "/admin/view-teachers",
+            element: <ViewTeacher />,
+          }
+          ,
+          {
+            path: "/admin/edit-teacher",
+            element: <EditTeacher />,
           }
           ,
           {
@@ -58,7 +73,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/grading",
-            element: <div>Grading</div>,
+            element: <Grading />,
           },
           {
             path: "/admin/department",
@@ -78,12 +93,58 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/profile",
-            element: <div>Profile</div>,
+            element: <EditProfileAdmin />
 
           }
         ]
 
       }
+      ,
+      {
+        path: '/student',
+        element: <Dashboard menuItem={StudentMenuItems} />,
+        children: [
+          {
+            path: '/student/courses',
+            element: <Course />
+          },
+          {
+            path: '/student/profile',
+            element: <div>Student Profile</div>
+          }
+          ,
+          {
+            path: '/student/transcript',
+            element: <div>Transcript</div>
+          }
+          ,
+          {
+            path: '/student/running-transcript',
+            element: <div>Running Transcript</div>
+          }
+          ,
+          {
+            path:'/student/change-password',
+            element:<ChangePassword/>
+          }
+        ]
+      }
+      ,
+      {
+        path: '/teacher',
+        element: <Dashboard menuItem={TeacherMenuItem} />,
+        children: [
+          {
+            path: '/teacher/profile',
+            element: <ProfileTeacher />
+          },
+          {
+            path: '/teacher/change-password',
+            element: <ChangePassword />
+          }
+        ]
+      }
+
     ]
   },
 

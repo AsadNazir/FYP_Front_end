@@ -56,9 +56,29 @@ export default function Login() {
       return
     }
 
-    await dispatch(addUser({ username: username, password: password }))
+    if (username === 'admin' && password === 'admin') {
+      await dispatch(addUser({ username: username, password: password, role: 'admin'}))
+      navigate('/admin')
+    }
+    else if (username === 'teacher' && password === 'teacher') {
+      await dispatch(addUser({ username: username, password: password, role: 'teacher'}))
+      navigate('/teacher')
+    }
+    else if (username === 'student' && password === 'student') {
+      await dispatch(addUser({ username: username, password: password, role: 'student'}))
+      navigate('/student')
+    }
+    else {
+      api.error({
+        message: 'Invalid Username or Password',
+        description: 'Please enter correct username and password',
+        placement: 'top'
+      })
+    }
 
-    navigate('/admin')
+
+
+
   }
 
 
@@ -76,14 +96,14 @@ export default function Login() {
       </div>
       <div className="flex flex-row justify-between ">
         <div className="left hidden sm:w-[35%] md:w-[40%] lg:w-[60%] sm:flex justify-center flex-col items-center">
-          <img src={loginPage} className='w-[70%] max-w-[400px] min-w-[200px]'/>
+          <img src={loginPage} className='w-[70%] max-w-[400px] min-w-[200px]' />
           {/* <h1 className={`${fontSizes.xLarge} font-semibold my-6`}>Welcome to PUCIT-CMS</h1>
           <p className={`${fontSizes.xSmall}`}>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis, non?
             <a href="#"> Read more about our app</a>
           </p> */}
         </div>
-        <div className='right w-[70%] mx-auto sm:w-[50%] md:w-[40%] lg:w-[40%] flex flex-col justify-center items-center'>
+        <div className='right w-[90%] mx-auto sm:w-[50%] md:w-[40%] lg:w-[40%] flex flex-col justify-center items-center'>
           <form className=' bg-white  min-w-[300px] w-[100%] lg:w-[90%] shadow-lg rounded-md p-8 flex flex-col justify-center border-2'>
             <h1 className={`${fontSizes.large} font-medium text-center`}>Login</h1>
             <div>

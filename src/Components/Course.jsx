@@ -5,11 +5,8 @@ import { message, Upload, Modal } from 'antd';
 const { Dragger } = Upload;
 import { HiAcademicCap, HiSearch, HiUpload } from 'react-icons/hi';
 import { fontSizes } from '../styles.js';
-import { studentAPI } from '../API/api.js';
-
 import TabBar from './TabBar.jsx';
-import Table from './MyTable.jsx';
-import MyTable from './MyTable.jsx';
+import MyTable from './MyTable.jsx';;
 
 const TabContent = [
     {
@@ -27,20 +24,19 @@ const TabContent = [
     {
         title: 'Offer Course',
         key: '3',
-        component: <h1>Offer Course</h1>,
+        component: <OfferCourse />,
         // icon: <HiAdjustments />,
     },
-    {
-        title: 'Register Course',
-        key: '4',
-        component: <h1>Regsiter Course</h1>,
-    }
-    ,
+    // {
+    //     title: 'Register Course',
+    //     key: '4',
+    //     component: <RegisterCourse/>,
+    // },
     {
         title: 'Road Map',
         key: '5',
         component: <h1>Road Map</h1>,
-    
+
     }
 
 ]
@@ -52,6 +48,290 @@ export default function Course() {
     return (
         <TabBar tabs={TabContent} />
     );
+}
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }, // Adjust label column span for desktop
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }, // Adjust wrapper column span for desktop
+    },
+};
+
+const { Option } = Select;
+
+
+
+function RoadMap() {return <h1>Road Map</h1>}
+    
+function RegisterCourse() {
+
+    const [form] = Form.useForm();
+
+    const onFinish =(values)=>{
+    }
+
+    return (
+        <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[800px] mx-auto w-max-[300px] p-10 md:p-0`} >
+
+            <Row > {/* Add gutter for spacing between columns */}
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Teacher"
+                        name="TeacherID"
+                        rules={[{ required: true, message: 'Please select Gender!' }]}
+                    >
+                        <Select>
+                            <Option value="1">A Mateen</Option>
+                            <Option value="2">Idrees</Option>
+                            <Option value="3">Rabia</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Offered Courses"
+                        name="OfferedCoursesId"
+                        rules={[{ required: true, message: 'Please select Offered Courses!' }]}
+                    >
+                        <Select>
+                            <Option value="1">CS-101 Maths</Option>
+                            <Option value="2">CS-102 SE</Option>
+                            <Option value="3">CS-103 Calc</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Section"
+                        name="SectionID"
+                        rules={[{ required: true, message: 'Please select Section!' }]}
+                    >
+                        <Select>
+                            <Option value="1">Morning</Option>
+                            <Option value="2">Evening</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Department"
+                        name="DepartmentID"
+                        rules={[{ required: true, message: 'Please select Department!' }]}
+                    >
+                        <Select>
+                            <Option value="1">Computer Science</Option>
+                            <Option value="2">Information Technology</Option>
+                            <Option value="3">Software Engineering</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Campus"
+                        name="CampusID"
+                        rules={[{ required: true, message: 'Please select Campus!' }]}
+                    >
+                        <Select>
+                            <Option value="1">Old Campus</Option>
+                            <Option value="2">New Campus</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Session"
+                        name="SessionID"
+                        rules={[{ required: true, message: 'Please select Batch!' }]}
+                    >
+                        <Select>
+                            <Option value="1">Fall 2023</Option>
+                            <Option value="2">Spring 2023</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                    <Form.Item
+                        label="Course"
+                        name="CourseID"
+                        rules={[{ required: true, message: 'Please select Campus!' }]}
+                    >
+                        <Select>
+
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            {/* On Sirs Demand we Can Add this feature as well */}
+            {/* <div className='my-2'>
+            <h1 className={`${fontSizes.medium} font-medium text-center my-2`}>Course Offered</h1>
+            <Table columns={offerCourseTableColumns} data={data} />
+        </div> */}
+
+            <Row className='flex justify-center'>
+                <Col>
+                    <Form.Item> {/* Adjust wrapper column for button */}
+                        <Button type="default" className='flex  items-center text-white bg-blue-500 ' size='large' htmlType='submit' loading={false} >
+                            <HiAcademicCap className='mr-2 text-xl' />
+                            Offer Course
+                        </Button>
+                    </Form.Item>
+                </Col>
+            </Row>
+        </Form>
+    );
+}
+
+
+function OfferCourse() {
+    // creating a form hook
+    const [form] = Form.useForm();
+
+    // function to handle form submission
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        console.log(
+            values
+        )
+
+        form.resetFields();
+    };
+
+
+
+    return (
+        <>
+            <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[800px] mx-auto w-max-[300px] p-10 md:p-0`} >
+
+                <Row > {/* Add gutter for spacing between columns */}
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Teacher"
+                            name="TeacherID"
+                            rules={[{ required: true, message: 'Please select Gender!' }]}
+                        >
+                            <Select>
+                                <Option value="1">A Mateen</Option>
+                                <Option value="2">Idrees</Option>
+                                <Option value="3">Rabia</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Batch"
+                            name="BatchID"
+                            rules={[{ required: true, message: 'Please select Batch!' }]}
+                        >
+                            <Select>
+                                <Option value="1">Fall 2020</Option>
+                                <Option value="2">Fall 2019</Option>
+                                <Option value="3">Fall 2023</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Section"
+                            name="SectionID"
+                            rules={[{ required: true, message: 'Please select Section!' }]}
+                        >
+                            <Select>
+                                <Option value="1">Morning</Option>
+                                <Option value="2">Evening</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Department"
+                            name="DepartmentID"
+                            rules={[{ required: true, message: 'Please select Department!' }]}
+                        >
+                            <Select>
+                                <Option value="1">Computer Science</Option>
+                                <Option value="2">Information Technology</Option>
+                                <Option value="3">Software Engineering</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Campus"
+                            name="CampusID"
+                            rules={[{ required: true, message: 'Please select Campus!' }]}
+                        >
+                            <Select>
+                                <Option value="1">Old Campus</Option>
+                                <Option value="2">New Campus</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Session"
+                            name="SessionID"
+                            rules={[{ required: true, message: 'Please select Batch!' }]}
+                        >
+                            <Select>
+                                <Option value="1">Fall 2023</Option>
+                                <Option value="2">Spring 2023</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+                        <Form.Item
+                            label="Course"
+                            name="CourseID"
+                            rules={[{ required: true, message: 'Please select Campus!' }]}
+                        >
+                            <Select>
+
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                {/* On Sirs Demand we Can Add this feature as well */}
+                {/* <div className='my-2'>
+                    <h1 className={`${fontSizes.medium} font-medium text-center my-2`}>Course Offered</h1>
+                    <Table columns={offerCourseTableColumns} data={data} />
+                </div> */}
+
+                <Row className='flex justify-center'>
+                    <Col>
+                        <Form.Item> {/* Adjust wrapper column for button */}
+                            <Button type="default" className='flex  items-center text-white bg-blue-500 ' size='large' htmlType='submit' loading={false} >
+                                <HiAcademicCap className='mr-2 text-xl' />
+                                Offer Course
+                            </Button>
+                        </Form.Item>
+                    </Col>
+                </Row>
+            </Form>
+        </>
+    );
+
 }
 
 export function AddCourse() {

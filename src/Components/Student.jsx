@@ -1,10 +1,11 @@
 import { React, useState } from 'react';
-import { Button, Form, Input, InputNumber, Select, Row, Col } from 'antd';
+import { Button, Form, Input, InputNumber, Select, Row, Col, Radio } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload, Modal } from 'antd';
 const { Dragger } = Upload;
 import { HiAcademicCap, HiUpload } from 'react-icons/hi';
 import { fontSizes } from '../styles';
+
 import { studentAPI } from '../API/api';
 
 
@@ -22,7 +23,6 @@ const formItemLayout = {
 };
 
 export default function AddStudentForm() {
-
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
@@ -77,9 +77,12 @@ export default function AddStudentForm() {
     form.resetFields();
   };
 
+
+
+
   return (
     <>
-      <h1 className={`text-center ${fontSizes.xLarge} font-medium my-5`}>Add Teachers</h1>
+      <h1 className={`text-center ${fontSizes.xLarge} font-medium my-5`}>Add Students</h1>
       <div className='flex justify-center items-center my-10'>
         <Button type="default" className='flex  items-center text-white bg-blue-500' size='large' htmlType='button' loading={false} onClick={showModal} >
           <HiUpload className='mr-2 text-xl' />
@@ -100,17 +103,17 @@ export default function AddStudentForm() {
           </p>
           <p className="ant-upload-text">Click or drag file to this area to upload</p>
           <p className="ant-upload-hint">
-            Please Upload the File Containing all the Teacher records.
+            Please Upload the File Containing all the sttudent records.
           </p>
         </Dragger>
       </Modal>
-      <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[800px] mx-auto w-max-[300px] p-10 md:p-0`} >
+      <Form form={form} {...formItemLayout} onFinish={onFinish} variant="outlined" className={` ${fontSizes.xxx} w-full md:max-w-[900px] mx-auto w-max-[300px] p-10 md:p-0`} >
 
         <Row > {/* Add gutter for spacing between columns */}
           <Col xs={{ span: 24 }} sm={{ span: 12 }}> {/* Adjust column span for mobile and desktop */}
             <Form.Item
-              label="Teacher ID"
-              name="TeacherCode"
+              label="Roll No"
+              name="RollNo"
               rules={[{
                 required: true, message: 'Please input Roll No!'
 
@@ -167,16 +170,23 @@ export default function AddStudentForm() {
           </Col>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
-              label="Email"
-              name="Email"
-              rules={[{ required: true, message: 'Please input Email!' }]}
+              label="City"
+              name="City"
             >
-              <Input className='rounded-lg outline-none border-gray-300' />
+              <Input className='rounded-lg outline-none border-gray-300' size='small' />
             </Form.Item>
           </Col>
         </Row>
 
         <Row >
+          <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+            <Form.Item
+              label="Country"
+              name="Country"
+            >
+              <Input className='rounded-lg outline-none border-gray-300' size='small' />
+            </Form.Item>
+          </Col>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Phone No"
@@ -185,7 +195,58 @@ export default function AddStudentForm() {
               <Input className='rounded-lg outline-none border-gray-300' size='small' />
             </Form.Item>
           </Col>
+        </Row>
 
+        <Row >
+          <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+            <Form.Item
+              label="Address"
+              name="Address"
+            >
+              <Input className='rounded-lg outline-none border-gray-300' size='small' />
+            </Form.Item>
+          </Col>
+          <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+            <Form.Item
+              label="Batch"
+              name="BatchID"
+              rules={[{ required: true, message: 'Please select Batch!' }]}
+            >
+              <Select defaultValue={1}>
+                <Option value="1">Fall 2018</Option>
+                <Option value="2">Fall 2019</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+            <Form.Item
+              label="Campus"
+              name="CampusID"
+            >
+              <Radio.Group>
+                <Radio value="1">Old Campus OC</Radio>
+                <Radio value="2">New Campus NC</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col xs={{ span: 24 }} sm={{ span: 12 }}>
+            <Form.Item
+              label="Section"
+              name="Section"
+              rules={[{ required: true, message: 'Please select Section!' }]}
+            >
+              <Select>
+                <Option value="1">Morning</Option>
+                <Option value="2">Afternoon</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
           <Col xs={{ span: 24 }} sm={{ span: 12 }}>
             <Form.Item
               label="Department"
@@ -208,7 +269,7 @@ export default function AddStudentForm() {
             <Form.Item> {/* Adjust wrapper column for button */}
               <Button type="default" className='flex  items-center text-white bg-blue-500 ' size='large' htmlType='submit' loading={false} >
                 <HiAcademicCap className='mr-2 text-xl' />
-                Add Teacher
+                Add Student
               </Button>
             </Form.Item>
           </Col>
