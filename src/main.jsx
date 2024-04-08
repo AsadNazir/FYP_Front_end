@@ -13,12 +13,13 @@ import Dashboard from './Pages/Dashboard.jsx';
 import Student from './Components/Student.jsx';
 import ViewAllStudents from './Components/ViewAllStudents.jsx';
 import Teacher, { EditTeacher } from './Components/Teacher.jsx';
-import Course from './Components/Course.jsx';
+import { Course } from './Components/StudentCourse.jsx';
 import Grading from './Components/Grading.jsx';
 import ViewTeacher from './Components/ViewAllteachers.jsx';
 import AddTeacherForm from './Components/Teacher.jsx';
 import { AdminMenuItems, StudentMenuItems, TeacherMenuItem } from './Constants/index.jsx';
 import { ChangePassword, EditProfileAdmin, EditProfileStudent, ProfileTeacher } from './Components/Profile.jsx';
+import StudentCourse from './Components/StudentCourse.jsx';
 
 const router = createBrowserRouter([
   {
@@ -105,9 +106,15 @@ const router = createBrowserRouter([
         element: <Dashboard menuItem={StudentMenuItems} />,
         children: [
           {
-            path: '/student/courses',
-            element: <Course />
+            path: '/student/',
+            element: <StudentCourse />
           },
+          {
+            path: '/student/course/:courseId',
+            element: <Course />,
+
+          },
+
           {
             path: '/student/profile',
             element: <div>Student Profile</div>
@@ -124,8 +131,8 @@ const router = createBrowserRouter([
           }
           ,
           {
-            path:'/student/change-password',
-            element:<ChangePassword/>
+            path: '/student/change-password',
+            element: <ChangePassword />
           }
         ]
       }
