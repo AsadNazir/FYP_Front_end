@@ -88,7 +88,20 @@ const gradePolicy=[
         GPA:0.0,
         range:'Withdrawn'
     }
+
+
+    
 ]
+
+function handleEdit(key, column, value) {
+    const newData = [...editableData];
+    const index = newData.findIndex((item) => key === item.key);
+    if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, { ...item, [column]: value });
+        setEditableData(newData);
+    }
+}
 
 function ViewGradingPolicy() {
     return (
@@ -103,4 +116,41 @@ function ViewGradingPolicy() {
             <MyTable columns={columns} data={gradePolicy} scroll={400} />
         </div>
     )
+}
+
+
+function EditGradingPolicy() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [editableData, setEditableData] = useState(gradePolicy);
+
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        setSearchTerm(value);
+
+        const filteredData = gradePolicy.filter((item) =>
+            item.grade.toLowerCase().includes(value.toLowerCase())
+        );
+        setEditableData(filteredData);
+    };
+
+    return (
+        <div className="w-[90%] md:w-[50%] mx-auto">
+            <div className="my-4">
+                <Select className="w-full shadow-md" placeholder="Select Session" defaultActiveFirstOption={true}>
+                    <Option value="1" key="1">1</Option>
+                    <Option value="2" key="2">2</Option>
+                    <Option value="3" key="3">3</Option>
+                </Select>
+            </div>
+            <div className="my-4">
+                <Input
+                    placeholder="Search Grade"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    prefix={<HiSearch />}
+                />
+            </div>
+            <Table columns={columns} dataSource={editableData} rowKey="grade" scroll={{ y: 400 }} />
+        </div>
+    );
 }
