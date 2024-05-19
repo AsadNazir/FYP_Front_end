@@ -134,7 +134,7 @@ function EditGradingPolicy() {
     };
 
     return (
-        <div className="w-[90%] md:w-[50%] mx-auto">
+        <div className="w-[98%] md:w-[50%] mx-auto">
             <div className="my-4">
                 <Select className="w-full shadow-md" placeholder="Select Session" defaultActiveFirstOption={true}>
                     <Option value="1" key="1">1</Option>
@@ -154,3 +154,55 @@ function EditGradingPolicy() {
         </div>
     );
 }
+
+function AddGradingPolicy() {
+    const [grade, setGrade] = useState('');
+    const [GPA, setGPA] = useState('');
+    const [range, setRange] = useState('');
+    const [data, setData] = useState(initialGradePolicy);
+
+    const handleAdd = () => {
+        const newKey = data.length ? data[data.length - 1].key + 1 : '1';
+        const newData = {
+            key: newKey,
+            grade,
+            GPA: parseFloat(GPA),
+            range,
+        };
+        setData([...data, newData]);
+        setGrade('');
+        setGPA('');
+        setRange('');
+    };
+
+    return (
+        <div className="w-[98%] md:w-[50%] mx-auto">
+            <div className="my-4">
+                <Input
+                    placeholder="Grade"
+                    value={grade}
+                    onChange={(e) => setGrade(e.target.value)}
+                />
+            </div>
+            <div className="my-4">
+                <Input
+                    placeholder="GPA"
+                    value={GPA}
+                    onChange={(e) => setGPA(e.target.value)}
+                />
+            </div>
+            <div className="my-4">
+                <Input
+                    placeholder="Range"
+                    value={range}
+                    onChange={(e) => setRange(e.target.value)}
+                />
+            </div>
+            <Button type="primary" onClick={handleAdd}>
+                Add Grading Policy
+            </Button>
+            <Table columns={columns} dataSource={data} rowKey="key" scroll={{ y: 400 }} />
+        </div>
+    );
+}
+
