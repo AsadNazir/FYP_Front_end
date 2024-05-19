@@ -1,9 +1,9 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { HiClipboardList, HiAdjustments, HiSearch } from 'react-icons/hi'
 import { MdDashboard } from 'react-icons/md'
 import TabBar from './TabBar.jsx'
 import MyTable from './MyTable.jsx'
-import { Input, Select } from 'antd'
+import { Input, Select, Button } from 'antd'
 
 
 const { Option } = Select
@@ -25,8 +25,8 @@ const TabContent = [
     {
         title: 'Add Grading Policy',
         key: '3',
-        component: <h1>Add Grading Policy</h1>,
-        icon: <HiAdjustments />,
+        component: <AddGradingPolicy />,
+        icon:<HiAdjustments/> ,
     },
 
 ]
@@ -93,33 +93,33 @@ const gradePolicy=[
     
 ]
 
-export default function Grading() 
-{
-    const [searchTerm, setSearchTerm] = useState('');
-    const [editableData, setEditableData] = useState(initialGradePolicy);
+// export default function Grading() 
+// {
+//     const [searchTerm, setSearchTerm] = useState('');
+//     const [editableData, setEditableData] = useState(initialGradePolicy);
 
-    const handleSearch = (e) => {
-        const { value } = e.target;
-        setSearchTerm(value);
+//     const handleSearch = (e) => {
+//         const { value } = e.target;
+//         setSearchTerm(value);
 
-        const filteredData = initialGradePolicy.filter((item) =>
-            item.grade.toLowerCase().includes(value.toLowerCase())
-        );
-        setEditableData(filteredData);
-    };
+//         const filteredData = initialGradePolicy.filter((item) =>
+//             item.grade.toLowerCase().includes(value.toLowerCase())
+//         );
+//         setEditableData(filteredData);
+//     };
 
-    const handleEdit = (key, column, value) => {
-        const newData = [...editableData];
-        const index = newData.findIndex((item) => key === item.key);
-        if (index > -1) {
-            const item = newData[index];
-            newData.splice(index, 1, { ...item, [column]: value });
-            setEditableData(newData);
-        }
-    };
+//     const handleEdit = (key, column, value) => {
+//         const newData = [...editableData];
+//         const index = newData.findIndex((item) => key === item.key);
+//         if (index > -1) {
+//             const item = newData[index];
+//             newData.splice(index, 1, { ...item, [column]: value });
+//             setEditableData(newData);
+//         }
+//     };
 
-    return <TabBar tabs={TabContent(handleEdit, editableData, setEditableData, handleSearch, searchTerm)} />;
-}
+//     return <TabBar tabs={TabContent(handleEdit, editableData, setEditableData, handleSearch, searchTerm)} />;
+// }
 
 function ViewGradingPolicy() {
     return (
@@ -182,7 +182,7 @@ function AddGradingPolicy({ setEditableData }) {
             <Button type="primary" onClick={handleAdd}>
                 Add Grading Policy
             </Button>
-            <Table columns={columns(() => {})} dataSource={initialGradePolicy} rowKey="key" scroll={{ y: 400 }} />
+            <MyTable scroll={{ y: 400 }} />
         </div>
     );
 }
