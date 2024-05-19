@@ -93,14 +93,32 @@ const gradePolicy=[
     
 ]
 
-function handleEdit(key, column, value) {
-    const newData = [...editableData];
-    const index = newData.findIndex((item) => key === item.key);
-    if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, [column]: value });
-        setEditableData(newData);
-    }
+export default function Grading() 
+{
+    const [searchTerm, setSearchTerm] = useState('');
+    const [editableData, setEditableData] = useState(initialGradePolicy);
+
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        setSearchTerm(value);
+
+        const filteredData = initialGradePolicy.filter((item) =>
+            item.grade.toLowerCase().includes(value.toLowerCase())
+        );
+        setEditableData(filteredData);
+    };
+
+    const handleEdit = (key, column, value) => {
+        const newData = [...editableData];
+        const index = newData.findIndex((item) => key === item.key);
+        if (index > -1) {
+            const item = newData[index];
+            newData.splice(index, 1, { ...item, [column]: value });
+            setEditableData(newData);
+        }
+    };
+
+    return <TabBar tabs={TabContent(handleEdit, editableData, setEditableData, handleSearch, searchTerm)} />;
 }
 
 function ViewGradingPolicy() {
@@ -119,64 +137,27 @@ function ViewGradingPolicy() {
 }
 
 
-function EditGradingPolicy() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [editableData, setEditableData] = useState(gradePolicy);
-
-    const handleSearch = (e) => {
-        const { value } = e.target;
-        setSearchTerm(value);
-
-        const filteredData = gradePolicy.filter((item) =>
-            item.grade.toLowerCase().includes(value.toLowerCase())
-        );
-        setEditableData(filteredData);
-    };
-
-    return (
-        <div className="w-[98%] md:w-[50%] mx-auto">
-            <div className="my-4">
-                <Select className="w-full shadow-md" placeholder="Select Session" defaultActiveFirstOption={true}>
-                    <Option value="1" key="1">1</Option>
-                    <Option value="2" key="2">2</Option>
-                    <Option value="3" key="3">3</Option>
-                </Select>
-            </div>
-            <div className="my-4">
-                <Input
-                    placeholder="Search Grade"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                    prefix={<HiSearch />}
-                />
-            </div>
-            <Table columns={columns} dataSource={editableData} rowKey="grade" scroll={{ y: 400 }} />
-        </div>
-    );
-}
-
-function AddGradingPolicy() {
+function AddGradingPolicy({ setEditableData }) {
     const [grade, setGrade] = useState('');
     const [GPA, setGPA] = useState('');
     const [range, setRange] = useState('');
-    const [data, setData] = useState(initialGradePolicy);
 
     const handleAdd = () => {
-        const newKey = data.length ? data[data.length - 1].key + 1 : '1';
+        const newKey = Date.now().toString(); // Unique key based on timestamp
         const newData = {
             key: newKey,
             grade,
             GPA: parseFloat(GPA),
             range,
         };
-        setData([...data, newData]);
+        setEditableData((prevData) => [...prevData, newData]);
         setGrade('');
         setGPA('');
         setRange('');
     };
 
     return (
-        <div className="w-[98%] md:w-[50%] mx-auto">
+        <div className="w-[90%] md:w-[50%] mx-auto">
             <div className="my-4">
                 <Input
                     placeholder="Grade"
@@ -201,8 +182,7 @@ function AddGradingPolicy() {
             <Button type="primary" onClick={handleAdd}>
                 Add Grading Policy
             </Button>
-            <Table columns={columns} dataSource={data} rowKey="key" scroll={{ y: 400 }} />
+            <Table columns={columns(() => {})} dataSource={initialGradePolicy} rowKey="key" scroll={{ y: 400 }} />
         </div>
     );
 }
-
