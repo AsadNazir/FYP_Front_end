@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { HiClipboardList, HiAdjustments, HiSearch } from 'react-icons/hi'
 import { MdDashboard } from 'react-icons/md'
 import TabBar from './TabBar.jsx'
@@ -26,7 +26,7 @@ const TabContent = [
         title: 'Add Grading Policy',
         key: '3',
         component: <AddGradingPolicy />,
-        icon:<HiAdjustments/> ,
+        icon: <HiAdjustments />,
     },
 
 ]
@@ -49,77 +49,76 @@ const columns = [
     }
 ]
 
-export default function Grading() {
-    return (
-        <TabBar tabs={TabContent} />
-    )
+// export default function Grading() {
+//     return (
+//         <TabBar tabs={TabContent} />
+//     )
 
-}
+// }
 
 
-const gradePolicy=[
+const gradePolicy = [
     {
-        grade:'A',
-        GPA:4.0,
-        range:'90-100'
+        grade: 'A',
+        GPA: 4.0,
+        range: '90-100'
     },
     {
-        grade:'A-',
-        GPA:3.0,
-        range:'80-89'
+        grade: 'A-',
+        GPA: 3.0,
+        range: '80-89'
     },
     {
-        grade:'B+',
-        GPA:2.0,
-        range:'70-79'
+        grade: 'B+',
+        GPA: 2.0,
+        range: '70-79'
     },
     {
-        grade:'B-',
-        GPA:1.0,
-        range:'60-69'
+        grade: 'B-',
+        GPA: 1.0,
+        range: '60-69'
     },
     {
-        grade:'B',
-        GPA:0.0,
-        range:'0-59'
+        grade: 'B',
+        GPA: 0.0,
+        range: '0-59'
     },
     {
-        grade:'W',
-        GPA:0.0,
-        range:'Withdrawn'
+        grade: 'W',
+        GPA: 0.0,
+        range: 'Withdrawn'
     }
 
 
-    
+
 ]
 
-// export default function Grading() 
-// {
-//     const [searchTerm, setSearchTerm] = useState('');
-//     const [editableData, setEditableData] = useState(initialGradePolicy);
+export default function Grading() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [editableData, setEditableData] = useState(gradePolicy);
 
-//     const handleSearch = (e) => {
-//         const { value } = e.target;
-//         setSearchTerm(value);
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        setSearchTerm(value);
 
-//         const filteredData = initialGradePolicy.filter((item) =>
-//             item.grade.toLowerCase().includes(value.toLowerCase())
-//         );
-//         setEditableData(filteredData);
-//     };
+        const filteredData = initialGradePolicy.filter((item) =>
+            item.grade.toLowerCase().includes(value.toLowerCase())
+        );
+        setEditableData(filteredData);
+    };
 
-//     const handleEdit = (key, column, value) => {
-//         const newData = [...editableData];
-//         const index = newData.findIndex((item) => key === item.key);
-//         if (index > -1) {
-//             const item = newData[index];
-//             newData.splice(index, 1, { ...item, [column]: value });
-//             setEditableData(newData);
-//         }
-//     };
+    const handleEdit = (key, column, value) => {
+        const newData = [...editableData];
+        const index = newData.findIndex((item) => key === item.key);
+        if (index > -1) {
+            const item = newData[index];
+            newData.splice(index, 1, { ...item, [column]: value });
+            setEditableData(newData);
+        }
+    };
 
-//     return <TabBar tabs={TabContent(handleEdit, editableData, setEditableData, handleSearch, searchTerm)} />;
-// }
+    return <TabBar tabs={TabContent} />;
+}
 
 function ViewGradingPolicy() {
     return (
