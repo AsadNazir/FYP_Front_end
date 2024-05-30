@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Button, Form, Input, InputNumber, Select, Row, Col, Radio } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload, Modal } from 'antd';
@@ -7,6 +7,10 @@ import { HiAcademicCap, HiUpload } from 'react-icons/hi';
 import { fontSizes } from '../styles';
 
 import { studentAPI } from '../API/api';
+import { getAllCampuses } from '../API/campus';
+import { getAllDept } from '../API/dept';
+import { getAllBatches } from '../API/batch';
+import { getAllSections } from '../API/section';
 
 
 const { Option } = Select;
@@ -26,6 +30,43 @@ export default function AddStudentForm() {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
+
+  const [section, setSection] = useState([]);
+  const [batch, setBatch] = useState([]);
+  const [campus, setCampus] = useState([]);
+  const [department, setDepartment] = useState([]);
+
+  useEffect(() => {
+    // fetch data from API
+    async function fetchData() {
+      await getAllCampuses().then((data) => {
+        setCampus(data);
+        console.log(data);
+      });
+
+      await getAllBatches().then((data) => {
+        setBatch(data);
+        console.log(data)
+      }
+
+      );
+
+      await getAllDept().then((data) => {
+        setDepartment(data);
+        console.log(data)
+      }
+      );
+
+      await getAllSections().then((data) => {
+        setSection(data);
+      }
+      );
+    }
+
+    fetchData();
+  }, []);
+
+
 
   const showModal = () => {
     setOpen(true);
