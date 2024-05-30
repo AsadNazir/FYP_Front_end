@@ -40,25 +40,22 @@ export default function AddStudentForm() {
     // fetch data from API
     async function fetchData() {
       await getAllCampuses().then((data) => {
-        setCampus(data);
-        console.log(data);
+        setCampus(data.data);
       });
 
       await getAllBatches().then((data) => {
-        setBatch(data);
-        console.log(data)
+        setBatch(data.data);
       }
 
       );
 
       await getAllDept().then((data) => {
-        setDepartment(data);
-        console.log(data)
+        setDepartment(data.data);
       }
       );
 
       await getAllSections().then((data) => {
-        setSection(data);
+        setSection(data.data);
       }
       );
     }
@@ -113,7 +110,6 @@ export default function AddStudentForm() {
     console.log(
       values
     )
-
 
     form.resetFields();
   };
@@ -253,9 +249,13 @@ export default function AddStudentForm() {
               name="BatchID"
               rules={[{ required: true, message: 'Please select Batch!' }]}
             >
+
               <Select defaultValue={1}>
-                <Option value="1">Fall 2018</Option>
-                <Option value="2">Fall 2019</Option>
+                {
+                  batch.map((item) => {
+                    return <Option value={item.BatchID}>{item.BatchName}</Option>
+                  })
+                }
               </Select>
             </Form.Item>
           </Col>
@@ -268,8 +268,13 @@ export default function AddStudentForm() {
               name="CampusID"
             >
               <Radio.Group>
-                <Radio value="1">Old Campus OC</Radio>
-                <Radio value="2">New Campus NC</Radio>
+                {
+                  campus.map((item) => {
+                    return <Radio value={item.CampusID}>{item.CampusName}</Radio>
+                  })
+                }
+                {/* <Radio value="1">Old Campus OC</Radio>
+                <Radio value="2">New Campus NC</Radio> */}
               </Radio.Group>
             </Form.Item>
           </Col>
@@ -280,8 +285,12 @@ export default function AddStudentForm() {
               rules={[{ required: true, message: 'Please select Section!' }]}
             >
               <Select>
-                <Option value="1">Morning</Option>
-                <Option value="2">Afternoon</Option>
+                {
+                  section.map((item) => {
+                    return <Option value={item.SectionID}>{item.SectionName}</Option>
+                  })
+                }
+  
               </Select>
             </Form.Item>
           </Col>
@@ -296,10 +305,11 @@ export default function AddStudentForm() {
               rules={[{ required: true, message: 'Please select Department!' }]}
             >
               <Select>
-                <Option value="1">Computer Science</Option>
-                <Option value="2">Information Technology</Option>
-                <Option value="3">Software Engineering</Option>
-                <Option value="4">Data Science</Option>
+                {
+                  department.map((item) => {
+                    return <Option value={item.DepartmentID}>{item.DepartmentName}</Option>
+                  })
+                }
               </Select>
             </Form.Item>
           </Col>
