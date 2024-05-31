@@ -14,7 +14,8 @@ export const  teacherAPI = {
     'addTeacher': baseURL + teacher + 'addTeacher',
     'getTeachers': baseURL + teacher + 'getall',
     'deleteTeacher': baseURL + teacher + 'deleteTeacher',
-    'updateTeacher': baseURL + teacher + 'updateTeacher'
+    'updateTeacher': baseURL + teacher + 'updateTeacher',
+    'getAllSupervisors': baseURL + teacher + 'getallsupervisors'
 }
 
 export const studentAPI = {

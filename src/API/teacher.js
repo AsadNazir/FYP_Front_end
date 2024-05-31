@@ -11,4 +11,15 @@ const getAllTeachers = async () => {
     return data;
 }
 
-export { getAllTeachers };
+const getAllSupervisors = async () => {
+    const response = await fetch(teacherAPI.getAllSupervisors, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    const data = await response.json();
+    return data;
+}
+
+export { getAllTeachers, getAllSupervisors };
