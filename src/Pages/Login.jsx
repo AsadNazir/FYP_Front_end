@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { notification } from 'antd';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../Redux/userSlice';
+import { LoginFunction } from '../API/auth';
 
 const customTheme = {
   button: {
@@ -33,6 +34,9 @@ export default function Login() {
 
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [userData, setUserData] = useState({})
+
+  const [loader, setLoader] = useState(false)
 
   const [passwordError, setPasswordError] = useState('default')
   const [usernameError, setUsernameError] = useState('default')
@@ -41,43 +45,77 @@ export default function Login() {
   const userNameOnchange = (e) => {
     setUsername(e.target.value)
   }
+
   const passwordOnchange = (e) => {
     if (e.target.value !== '') {
       setPasswordError('default');
     }
     setPassword(e.target.value)
   }
+
   const valiadte = async (event) => {
     event.preventDefault();
 
     if (username === '' || password === '') {
       setPasswordError('error');
       openNotification('top')
-      return
+      return;
     }
 
-    if (username === 'admin' && password === 'admin') {
-      await dispatch(addUser({ username: username, password: password, role: 'admin'}))
-      navigate('/admin')
-    }
-    else if (username === 'teacher' && password === 'teacher') {
-      await dispatch(addUser({ username: username, password: password, role: 'teacher'}))
-      navigate('/teacher')
-    }
-    else if (username === 'student' && password === 'student') {
-      await dispatch(addUser({ username: username, password: password, role: 'student'}))
-      navigate('/student')
-    }
-    else {
+    setLoader(true)
+    const data = await LoginFunction(username, password);
+    setLoader(false)
+
+    if (data.error === true) {
       api.error({
         message: 'Invalid Username or Password',
         description: 'Please enter correct username and password',
         placement: 'top'
       })
+      return;
+    }
+    else {
+  
+
+      await dispatch(addUser({ username: username, userData: data.data }))
+
+      if (data.data.role === 'admin') {
+        navigate('/admin')
+      }
+
+      if (data.data.role === 'teacher') {
+        navigate('/teacher')
+      }
+
+      if (data.data.role === 'studentzzzzzzzz') {
+        navigate('/student')
+      }
+
+      else {
+        api.error({
+          message: 'Invalid Username or Password ',
+          description: 'Please enter correct username and password',
+          placement: 'top'
+        })
+      }
     }
 
 
-
+    // if (username === 'teacher' && password === 'teacher') {
+    //   await dispatch(addUser({ username: username, password: password, role: 'teacher' }))
+    //   navigate('/teacher')
+    // }
+    // if (username === 'student' && password === 'student') {
+    //   await dispatch(addUser({ username: username, password: password, role: 'student' }))
+    //   navigate('/student')
+    // }
+    // else {
+    //   api.error({
+    //     message: 'Invalid Username or Password',
+    //     description: 'Please enter correct username and password',
+    //     placement: 'top'
+    //   })
+    // }
 
   }
 
@@ -129,7 +167,9 @@ export default function Login() {
               <Label htmlFor="remember" className={`${fontSizes.xSmall} font-normal`}>Remember me</Label>
             </div>
             <Flowbite theme={{ theme: customTheme }}>
-              <Button gradientDuoTone="purpleToBlue" type='submit' onClick={valiadte} size="xl" >Login</Button>
+              <Button gradientDuoTone="purpleToBlue" type='submit' onClick={valiadte} size="xl" >{
+                loader ? 'Loading...' : 'Login'
+              }</Button>
             </Flowbite>
             <div className={`flex ${fontSizes.small} items-center gap-2 mt-6`}>
               <a href="#" className={`${fontSizes.xSmall} cursor-pointer text-blue-700 font-semibold`}>Forgot your password?</a>

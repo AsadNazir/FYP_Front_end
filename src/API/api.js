@@ -7,18 +7,27 @@ const department = 'department/';
 const student = 'student/';
 const grade = 'grade/';
 const course = 'course/';
+const auth = 'auth/';
+const teacher = 'faculty/';
 
+export const  teacherAPI = {
+    'addTeacher': baseURL + teacher + 'addTeacher',
+    'getTeachers': baseURL + teacher + 'getall',
+    'deleteTeacher': baseURL + teacher + 'deleteTeacher',
+    'updateTeacher': baseURL + teacher + 'updateTeacher',
+    'getAllSupervisors': baseURL + teacher + 'getallsupervisors'
+}
 
 export const studentAPI = {
-    'addStudent': baseURL + 'addStudent',
-    'getStudents': baseURL + 'getall',
-    'deleteStudent': baseURL + 'deleteStudent',
-    'updateStudent': baseURL + 'updateStudent'
+    'addStudent': baseURL + student + 'addStudent',
+    'getStudents': baseURL + student + 'getall',
+    'deleteStudent': baseURL + student + 'deleteStudent',
+    'updateStudent': baseURL + student + 'updateStudent'
 }
 
 export const gradeAPI = {
     'addGrade': baseURL + grade + 'addGrade',
-    'getGrades': baseURL + grade + 'getGrades',
+    'getGrades': baseURL + grade + 'getall',
     'deleteGrade': baseURL + grade + 'deleteGrade',
     'updateGrade': baseURL + grade + 'updateGrade'
 }
@@ -65,3 +74,7 @@ export const departmentAPI = {
     'updateDepartment': baseURL + department + 'updatedepartment'
 }
 
+export const authAPI = {
+    'login': baseURL + auth + 'login',
+    'register': baseURL + auth + 'register'
+}
