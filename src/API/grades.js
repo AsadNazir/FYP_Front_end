@@ -1,15 +1,14 @@
-import { campusAPI } from "./api";
+import { gradeAPI } from "./api";
 
-const getAllCampuses = async () => {
-    const response = await fetch(campusAPI.getAll, {
+const getAllGrades = async () => {
+    const response = await fetch(gradeAPI.getGrades, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
     });
-    
     const data = await response.json();
     return data;
 }
 
-export { getAllCampuses };
+export { getAllGrades };

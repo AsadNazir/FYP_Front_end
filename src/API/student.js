@@ -42,3 +42,5 @@ const updateStudent = async (student) => {
     const data = await response.json();
     return data;
 }
+
+export { addStudent, getStudents, deleteStudent, updateStudent };
